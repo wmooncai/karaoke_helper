@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="app_name">Karaoke Helper</string>
+    <string name="song_lyrics_hint">Song Lyrics</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_karaoke_helper">Karaoke Helper</string>
+    
+	<dimen name="button_size">150dp</dimen>
+	<string name="bus_button_text">Bus</string>
+	<string name="happy_face_button_text">Happy Face</string>
+	
+	<integer name="song_lyrics_lines">10</integer>
+	<integer name="song_lyrics_lines_min">1</integer>
+	<dimen name="song_lyrics_font_size">20dp</dimen>
+	
+	<string name="verse_view_hint">Verse Line #</string>
+	
+	<integer name="scroll_rate">10</integer>
+		
+    <string-array name="bus_song">
+        <item>The wheels on the bus go round and round</item>
+        <item>Round and round, round and round</item>
+        <item>The wheels on the bus go round and round</item>
+        <item>All through the town.</item>
+        <item>The wipers on the bus go "Swish, swish, swish,</item>
+        <item>Swish, swish, swish, swish, swish, swish"</item>
+        <item>The wipers on the bus go "Swish, swish, swish"</item>
+        <item>All through the town.</item>
+        <item>The door on the bus goes open and shut</item>
+        <item>Open and shut, open and shut</item>
+        <item>The door on the bus goes open and shut</item>
+        <item>All through the town.</item>
+        <item>The horn on the bus goes "Beep, beep, beep</item>
+        <item>Beep, beep, beep, beep, beep, beep"</item>
+        <item>The horn on the bus goes "Beep, beep, beep"</item>
+        <item>All through the town.</item>
+        <item>The gas on the bus goes "Glug, glug, glug</item>
+        <item>Glug, glug, glug, glug, glug, glug"</item>
+        <item>The gas on the bus goes "Glug, glug, glug"</item>
+        <item>All through the town.</item>
+        <item>The money on the bus goes "Clink, clink, clink,</item>
+        <item>Clink, clink, clink, clink, clink, clink"</item>
+        <item>The money on the bus goes "Clink, clink, clink"</item>
+        <item>All through the town.</item>
+        <item>The baby on the bus says, "Wah, wah, wah!</item>
+        <item>Wah, wah, wah, wah, wah, wah!"</item>
+        <item>The baby on the bus says, "Wah, wah, wah!"</item>
+        <item>All through the town.</item>
+        <item>The people on the bus say, "Shh, shh, shh,</item>
+        <item>Shh, shh, shh, shh, shh, shh"</item>
+        <item>The people on the bus say, "Shh, shh, shh"</item>
+        <item>All through the town.</item>
+        <item>The mommy on the bus says, "I love you,</item>
+        <item>I love you, I love you"</item>
+        <item>The daddy on the bus says, "I love you, too"</item>
+        <item>All through the town.</item>
+    </string-array>
+    <string-array name="happy_face_song">
+        <item>If you\'re happy and you know it,</item>
+        <item>Clap your hands</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Clap your hands</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Then your face will surely show it</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Clap your hands.</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Tap your toe</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Tap your toe</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Then your face will surely show it</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Tap your toe.</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Nod your head</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Nod your head</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Then your face will surely show it</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Nod your head.</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Clap your hands</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Clap your hands</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Then your face will surely show it</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Clap your hands.</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Then your face will surely show it</item>
+        <item>If you\'re happy and you know it,</item>
+        <item>Clap your hands.</item>
+    </string-array>
+</resources>

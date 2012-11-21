@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/songView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/song_lyrics_hint"
+        android:minLines="@integer/song_lyrics_lines_min"
+        android:textSize="@dimen/song_lyrics_font_size"
+        tools:context=".KaraokeHelper" />
+
+    <ImageView
+        android:id="@+id/happyFaceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@drawable/happy_face_2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="56dp"
+        android:layout_toLeftOf="@+id/songText"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:contentDescription="@string/happy_face_button_text"
+        android:longClickable="true"
+        android:maxHeight="@dimen/button_size"
+        android:maxWidth="@dimen/button_size"
+        android:scaleType="fitCenter"
+        android:src="@drawable/happy_face_2" />
+
+    <TextView
+        android:id="@+id/verseView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/happyFaceButton"
+        android:layout_alignParentLeft="true"
+        android:hint="@string/verse_view_hint" />
+
+    <ImageView
+        android:id="@+id/busButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:clickable="false"
+        android:contentDescription="@string/bus_button_text"
+        android:longClickable="false"
+        android:maxHeight="@dimen/button_size"
+        android:maxWidth="@dimen/button_size"
+        android:scaleType="fitCenter"
+        android:src="@drawable/yellow_bus_2"
+        android:visibility="invisible" />
+
+</RelativeLayout>
