@@ -7,7 +7,9 @@
     
 	<dimen name="button_size">150dp</dimen>
 	<string name="bus_button_text">Bus</string>
+	<string name="bus_lyrics_hint">The Wheels on the Bus</string>
 	<string name="happy_face_button_text">Happy Face</string>
+	<string name="happy_face_lyrics_hint">When You Know You\'re Happy</string>
 	
 	<integer name="song_lyrics_lines">10</integer>
 	<integer name="song_lyrics_lines_min">1</integer>

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:hint="@string/song_lyrics_hint"
+        android:hint="@string/happy_face_lyrics_hint"
         android:minLines="@integer/song_lyrics_lines_min"
         android:textSize="@dimen/song_lyrics_font_size"
         tools:context=".KaraokeHelper" />
