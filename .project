@@ -30,4 +30,11 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Utils</name>
+			<type>2</type>
+			<location>/Users/wally/VirtualBox-VM-Shared/HOMEWORK/Utils</location>
+		</link>
+	</linkedResources>
 </projectDescription>

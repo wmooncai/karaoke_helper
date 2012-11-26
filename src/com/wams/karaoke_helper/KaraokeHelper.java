@@ -19,66 +19,238 @@ package com.wams.karaoke_helper;
  *   SUPER BONUS: auto-present speed varies with length of the line presented
  *   
  */
+
+import utils.*;
+
+// import com.wams.Utils.WAMSActivity;
+
 import android.os.Bundle;
-import android.app.Activity;
+// import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-public class KaraokeHelper extends Activity {
+public class KaraokeHelper extends WAMSActivity {
 
-	private int mHappyFaceLine = 0;
-	private String[] mHappyFaceSong;
+	Context mContext;
 	
+	private ImageView mHappyFaceButton;
+	private int mHappyFaceLine = 0;
+	// private String[] mHappySong;
+	
+	private ImageView mBusButton;
 	private int mBusLine = 0;
-	private String[] mBusSong;
+	// private String[] mBusSong;
+	
+	private TextView mSongView;
+	private String[] mSong;
+	
+	private Song mmSong;
+	
+	private TextView mVerseView;
+	private int mVerseDelay;
+	// private int mVerseCount;
+	
+	// private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_karaoke_helper);
         
-        Context ctx = getBaseContext();
-        final TextView songView = (TextView)findViewById(R.id.songView);
-        final TextView verseView = (TextView)findViewById(R.id.verseView);
+        mContext = getBaseContext();
         
-        mBusSong = ctx.getResources().getStringArray(R.array.bus_song);
-        final ImageView busButton = (ImageView)findViewById(R.id.busButton);
-        busButton.setOnClickListener(
-        	new View.OnClickListener()
-        	{
-        		public void onClick(View v)
-        		{
-        			songView.setText(mBusSong[mBusLine]);
-        			verseView.setText("Verse #: " + mBusLine); // Integer.toString(mBusLine)
-        			mBusLine = (mBusLine < (mBusSong.length-1)) ? (mBusLine + 1) : 0;
-        		}
-        	}
-    	);
+        mSongView = (TextView) findViewById(R.id.songView);
+        mVerseView = (TextView) findViewById(R.id.verseView);
+        mVerseDelay = mContext.getResources().getInteger(R.integer.scroll_rate);
         
-        mHappyFaceSong = ctx.getResources().getStringArray(R.array.happy_face_song);
-        final ImageView happyFaceButton = (ImageView)findViewById(R.id.happyFaceButton);
-        happyFaceButton.setOnClickListener(
-            	new View.OnClickListener()
-            	{
-            		public void onClick(View v)
-            		{
-            			songView.setText(mHappyFaceSong[mHappyFaceLine]);
-            			verseView.setText("Verse #: " + mHappyFaceLine);
-            			mHappyFaceLine = (mHappyFaceLine < (mHappyFaceSong.length-1))
-            					? (mHappyFaceLine + 1) : 0;
-            		}
-            	}
-        	);
-    }
+        mmSong = new Song(mSongView, mVerseView
+        		,mContext.getResources().getInteger(R.integer.scroll_rate)
+        		,mContext.getResources().getInteger(R.integer.scroll_min)
+        		, mContext.getResources().getInteger(R.integer.scroll_max));
+        
+        setupBusSongButton();
+        
+        setupHappyFaceSongButton();
+        
+        setupAutoScrollSeeker();
 
+        setupAutoScrollCB();
+        
+   } // onCreate()
+
+    // ************************************************************************
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_karaoke_helper, menu);
         return true;
     }
+
+    // ########################################################################
+
+    private void setupBusSongButton() {
+
+    		mBusButton = (ImageView) findViewById(R.id.busButton);
+
+        if (mBusButton.isShown()) {
+	        // mmSong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
+        	mSong = mContext.getResources().getStringArray(R.array.bus_song);
+	    	final TextView songView = mSongView;
+	    	final TextView verseView = mVerseView;
+	        final ImageView busButton = mBusButton;
+	        busButton.setOnClickListener(
+	        	new View.OnClickListener()
+	        	{
+	        		public void onClick(View v)
+	        		{
+	        			// mmSong.singNextVerse();
+        			
+	        			 songView.setText(mSong[mBusLine]);
+	        			 
+	        			verseView.setText("Verse #: " + (mBusLine + 1)
+	        					+ " / " + mSong.length);
+	        			mBusLine = (mBusLine < (mSong.length - 1))
+	        						? (mBusLine + 1) : 0;
+					
+	        		}
+	        	}
+	    	);
+        }
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    private void setupHappyFaceSongButton() {
+
+    	mHappyFaceButton = (ImageView) findViewById(R.id.happyFaceButton);
+
+    	if (mHappyFaceButton.isShown()) {
+	    	// mmSong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
+    		mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
+	    	final TextView songView = mSongView;
+	    	final TextView verseView = mVerseView;
+	        final ImageView happyFaceButton = mHappyFaceButton;
+	        happyFaceButton.setOnClickListener(
+            	new View.OnClickListener()
+            	{
+            		public void onClick(View v)
+            		{
+            		//	mmSong.singNextVerse();
+        			
+            			songView.setText(mSong[mHappyFaceLine]);
+            			verseView.setText("Verse #: " + (mHappyFaceLine + 1)
+            					+ " / " + mSong.length);
+            			mHappyFaceLine =
+            					(mHappyFaceLine < (mSong.length - 1))
+            						? (mHappyFaceLine + 1) : 0;
+					
+            		}
+            	}
+        	);
+    	}
+    }
+    
+    // ------------------------------------------------------------------------
+
+    private void setupAutoScrollSeeker() {
+    	
+        final TextView autoScrollSeekerValue = (TextView) findViewById(R.id.autoScrollSeekerValue);
+        final SeekBar autoScrollSeeker = (SeekBar) findViewById(R.id.autoScrollSeeker);
+        
+        autoScrollSeekerValue.setText(mVerseDelay + " secs.");
+        
+        autoScrollSeeker.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+        
+        	@Override
+        	public void onProgressChanged(SeekBar seekBar, int progress,
+        			boolean fromUser) {
+        		
+        		mVerseDelay = progress;
+        		autoScrollSeekerValue.setText(mVerseDelay + " secs.");
+        	}
+
+        	@Override
+        	public void onStartTrackingTouch(SeekBar seekBar) {}
+
+        	@Override
+        	public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+    }
+    
+    // ------------------------------------------------------------------------
+
+    private void setupAutoScrollCB() {
+    
+    	final CheckBox autoScrollCB = (CheckBox) findViewById(R.id.autoScrollCB);
+    	final CheckBox autoScrollByVerseLengthCB
+    		= (CheckBox) findViewById(R.id.autoScrollByVerseLengthCB);
+    	
+    	autoScrollCB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				
+				if (autoScrollCB.isChecked()) {
+					if (autoScrollByVerseLengthCB.isChecked())
+						autoScrollByVerseLengthCB.setChecked(false);
+					
+					mmSong.singSong();
+				}
+			}
+		});
+    }
     
 
-}
+    
+    // ------------------------------------------------------------------------
+    
+/*
+    private void playSong() throws InterruptedException {
+    	    	
+    	if (mBusButton.isShown()) {
+    		mSong = mContext.getResources().getStringArray(R.array.bus_song);
+    	} else if (mHappyFaceButton.isShown()) {
+    		mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
+    	} else mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
+    	
+    	// Sanitize mVerseDelay
+    	int minDelay = mContext.getResources().getInteger(R.integer.scroll_min);
+    	int maxDelay = mContext.getResources().getInteger(R.integer.scroll_max);
+    	if (mVerseDelay < minDelay) {
+    		mVerseDelay = minDelay;
+    	} else if (mVerseDelay > maxDelay)
+    		mVerseDelay = maxDelay;
+    	
+    	// scheduler.schedule(verseToScreen(mVerseDelay), 0, SECONDS);
+
+    }
+
+    private Runnable verseToScreen(int verseCounter) {
+    	
+    	final int fVerseCounter = verseCounter;
+    	
+    	final Runnable toScreen = new Runnable() {
+    		public void run() {
+    			
+    			if (fVerseCounter < mSong.length) {
+    				mSongView.setText(mSong[fVerseCounter].toString());
+    				mVerseView.setText("Verse #: " + mVerseCount + " / " + mSong.length);
+    				
+    				final ScheduledFuture<?> toScreenHandle = scheduler.schedule(verseToScreen(fVerseCounter - 1), mVerseDelay, SECONDS);
+    			}
+    		}
+    	};
+    	
+    	return toScreen;
+    }
+*/
+
+} // KaraokeHelper.java

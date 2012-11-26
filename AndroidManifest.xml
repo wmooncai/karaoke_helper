@@ -12,6 +12,10 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+            android:name=".WAMSActivity"
+            android:label="WAMS Activity" >
+        </activity>
+        <activity
             android:name=".KaraokeHelper"
             android:label="@string/title_activity_karaoke_helper" >
             <intent-filter>

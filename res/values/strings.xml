@@ -5,6 +5,8 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_karaoke_helper">Karaoke Helper</string>
     
+    <dimen name="screen_padding">5dp</dimen>
+    
 	<dimen name="button_size">150dp</dimen>
 	<string name="bus_button_text">Bus</string>
 	<string name="bus_lyrics_hint">The Wheels on the Bus</string>
@@ -17,7 +19,13 @@
 	
 	<string name="verse_view_hint">Verse Line #</string>
 	
-	<integer name="scroll_rate">10</integer>
+	<string name="auto_scroll_text">Auto-scroll</string>
+	<string name="auto_scroll_by_verse_length_text">Auto-scroll by verse length</string>
+	<string name="auto_scroll_units">secs.</string>
+	
+	<integer name="scroll_min">1</integer>
+	<integer name="scroll_rate">1</integer>
+	<integer name="scroll_max">10</integer>
 		
     <string-array name="bus_song">
         <item>The wheels on the bus go round and round</item>

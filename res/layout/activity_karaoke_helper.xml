@@ -1,59 +1,121 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/karaokeHelperRL"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="@dimen/screen_padding" >
 
     <TextView
         android:id="@+id/songView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:hint="@string/happy_face_lyrics_hint"
+        android:lines="3"
         android:minLines="@integer/song_lyrics_lines_min"
         android:textSize="@dimen/song_lyrics_font_size"
         tools:context=".KaraokeHelper" />
-
-    <ImageView
-        android:id="@+id/happyFaceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@drawable/happy_face_2"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="56dp"
-        android:layout_toLeftOf="@+id/songText"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:contentDescription="@string/happy_face_button_text"
-        android:longClickable="true"
-        android:maxHeight="@dimen/button_size"
-        android:maxWidth="@dimen/button_size"
-        android:scaleType="fitCenter"
-        android:src="@drawable/happy_face_2" />
-
-    <TextView
-        android:id="@+id/verseView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/happyFaceButton"
-        android:layout_alignParentLeft="true"
-        android:hint="@string/verse_view_hint" />
-
-    <ImageView
-        android:id="@+id/busButton"
-        android:layout_width="wrap_content"
+        
+    <LinearLayout
+        android:id="@+id/karaokeControlsLL"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:adjustViewBounds="true"
-        android:clickable="false"
-        android:contentDescription="@string/bus_button_text"
-        android:longClickable="false"
-        android:maxHeight="@dimen/button_size"
-        android:maxWidth="@dimen/button_size"
-        android:scaleType="fitCenter"
-        android:src="@drawable/yellow_bus_2"
-        android:visibility="invisible" />
+        android:layout_alignRight="@+id/verseView"
+        android:layout_below="@+id/autoScrollByVerseLengthCB"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical" >
 
+	    <TextView
+	        android:id="@+id/verseView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/verse_view_hint"
+	        android:lines="1" />
+
+	    <CheckBox
+	        android:id="@+id/autoScrollByVerseLengthCB"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@string/app_name"
+	        android:hint="@string/app_name"
+	        android:text="@string/auto_scroll_by_verse_length_text" />
+	
+	    <CheckBox
+	        android:id="@+id/autoScrollCB"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@string/auto_scroll_text"
+	        android:hint="@string/auto_scroll_text"
+	        android:text="@string/auto_scroll_text" />
+
+	    <LinearLayout
+	        android:id="@+id/autoScrollSeekerLL"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center|fill"
+	        android:gravity="center|fill" >
+
+	        <SeekBar
+	            android:id="@+id/autoScrollSeeker"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="36dp"
+	            android:layout_weight="1"
+	            android:max="@integer/scroll_max"
+	            android:progress="@integer/scroll_rate" />
+
+	        <TextView
+	            android:id="@+id/autoScrollSeekerValue"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="fill_horizontal"
+	            android:hint="@string/auto_scroll_units"
+	            android:maxLines="1" />
+	    </LinearLayout>
+
+	    <FrameLayout
+	        android:id="@+id/songButtonsFL"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center|fill"
+	        android:foregroundGravity="center|fill"
+	        android:measureAllChildren="false" >
+
+	        <ImageView
+	            android:id="@+id/happyFaceButton"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:adjustViewBounds="true"
+	            android:clickable="true"
+	            android:contentDescription="@string/happy_face_button_text"
+	            android:longClickable="true"
+	            android:maxHeight="@dimen/button_size"
+	            android:maxWidth="@dimen/button_size"
+	            android:nextFocusDown="@id/autoScrollCB"
+	            android:nextFocusUp="@id/autoScrollSeeker"
+	            android:scaleType="fitCenter"
+	            android:src="@drawable/happy_face_2" />
+
+	        <ImageView
+	            android:id="@+id/busButton"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:adjustViewBounds="true"
+	            android:clickable="false"
+	            android:contentDescription="@string/bus_button_text"
+	            android:longClickable="false"
+	            android:maxHeight="@dimen/button_size"
+	            android:maxWidth="@dimen/button_size"
+	            android:scaleType="fitCenter"
+	            android:src="@drawable/yellow_bus_2"
+	            android:visibility="gone" />
+
+	    </FrameLayout>
+    
+    </LinearLayout>
+    
 </RelativeLayout>
