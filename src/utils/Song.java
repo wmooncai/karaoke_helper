@@ -99,6 +99,16 @@ public class Song {
 	
 	private class Verse implements Runnable {
 
+		/*
+		 *  This won't work because all UI I/O must occur in the UI thread.
+		 *  
+		 *  This is a potential reference solution:
+		 *  
+		 *  http://android-developers.blogspot.com/2007/11/stitch-in-time.html
+		 *  
+		 */
+		
+		
 		String mThreadName;
 		
 		Verse(String name) { mThreadName = name; }
