@@ -76,8 +76,14 @@ public class Song {
 
 	public void singNextVerse() {
 		mSongTV.setText(mSong[mVerseLine]);
-		mVerseTV.setText("Verse: " + mVerseLine + " / " + mSong.length);
-		mVerseLine++;
+		mVerseTV.setText("Verse: " + (mVerseLine + 1) + " / " + mSong.length);
+		
+		// Wrap the song or increment it
+		if (mVerseLine < (mSong.length - 1) ) {
+			mVerseLine++;
+		} else {
+			mVerseLine = 0;
+		}
 	}
 	
     // ------------------------------------------------------------------------
