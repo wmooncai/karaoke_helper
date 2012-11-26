@@ -42,7 +42,7 @@ public class KaraokeHelper extends WAMSActivity {
 	Context mContext;
 	
 	private ImageView mHappyFaceButton;
-	private int mHappyFaceLine = 0;
+	// private int mHappyFaceLine = 0;
 	// private String[] mHappySong;
 	
 	private ImageView mBusButton;
@@ -135,23 +135,23 @@ public class KaraokeHelper extends WAMSActivity {
     	if (mHappyFaceButton.isShown()) {
 	    	// mmSong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
     		mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
-	    	final TextView songView = mSongView;
-	    	final TextView verseView = mVerseView;
-	        final ImageView happyFaceButton = mHappyFaceButton;
-	        happyFaceButton.setOnClickListener(
+	    	// final TextView songView = mSongView;
+	    	// final TextView verseView = mVerseView;
+	        // final ImageView happyFaceButton = mHappyFaceButton;
+	        mHappyFaceButton.setOnClickListener(
             	new View.OnClickListener()
             	{
             		public void onClick(View v)
             		{
-            		//	mmSong.singNextVerse();
-        			
+            		mmSong.singNextVerse();
+        			/*
             			songView.setText(mSong[mHappyFaceLine]);
             			verseView.setText("Verse #: " + (mHappyFaceLine + 1)
             					+ " / " + mSong.length);
             			mHappyFaceLine =
             					(mHappyFaceLine < (mSong.length - 1))
             						? (mHappyFaceLine + 1) : 0;
-					
+					*/
             		}
             	}
         	);
