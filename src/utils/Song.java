@@ -19,7 +19,7 @@ import utils.Debug;
 
 public class Song {
 	
-	String[] mmSong;
+	String[] mSong;
 	
 	public boolean mAutoScroll = false;
 	public boolean mAutoScrollByLength = false;
@@ -56,7 +56,7 @@ public class Song {
 
 	public void setSong(String[] song) {
 		if (song.length > 0) {
-			mmSong = song;
+			mSong = song;
 		} else d.toLog(Debug.DEBUG_LEVEL_DEBUG, "ERROR setSong() - song.length: "
 				+ song.length);
 	}
@@ -75,8 +75,8 @@ public class Song {
     // ------------------------------------------------------------------------
 
 	public void singNextVerse() {
-		mSongTV.setText(mmSong[mVerseLine]);
-		mVerseTV.setText(mVerseLine + " secs.");
+		mSongTV.setText(mSong[mVerseLine]);
+		mVerseTV.setText("Verse: " + mVerseLine + " / " + mSong.length);
 		mVerseLine++;
 	}
 	
@@ -85,7 +85,7 @@ public class Song {
 	public void singSong() {
 		
 		verseThread.start();
-		for (int line = 0; line < mmSong.length; line++) {
+		for (int line = 0; line < mSong.length; line++) {
 			try {
 				Thread.sleep(mAutoScrollDelay);
 			} catch (InterruptedException e) {

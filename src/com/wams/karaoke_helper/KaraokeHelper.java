@@ -46,11 +46,11 @@ public class KaraokeHelper extends WAMSActivity {
 	// private String[] mHappySong;
 	
 	private ImageView mBusButton;
-	private int mBusLine = 0;
+	// private int mBusLine = 0;
 	// private String[] mBusSong;
 	
 	private TextView mSongView;
-	private String[] mSong;
+	// private String[] mSong;
 	
 	private Song mmSong;
 	
@@ -76,9 +76,11 @@ public class KaraokeHelper extends WAMSActivity {
         		,mContext.getResources().getInteger(R.integer.scroll_min)
         		, mContext.getResources().getInteger(R.integer.scroll_max));
         
-        setupBusSongButton();
+        setupSongButton();
         
-        setupHappyFaceSongButton();
+        // setupBusSongButton();
+        
+        // setupHappyFaceSongButton();
         
         setupAutoScrollSeeker();
 
@@ -100,45 +102,45 @@ public class KaraokeHelper extends WAMSActivity {
 
     		mBusButton = (ImageView) findViewById(R.id.busButton);
 
-        if (mBusButton.isShown()) {
-	        // mmSong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
-        	mSong = mContext.getResources().getStringArray(R.array.bus_song);
-	    	final TextView songView = mSongView;
-	    	final TextView verseView = mVerseView;
+        if (mBusButton.isClickable()) {
+	        mmSong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
+        	// mSong = mContext.getResources().getStringArray(R.array.bus_song);
+	    	// final TextView songView = mSongView;
+	    	// final TextView verseView = mVerseView;
 	        final ImageView busButton = mBusButton;
 	        busButton.setOnClickListener(
 	        	new View.OnClickListener()
 	        	{
 	        		public void onClick(View v)
 	        		{
-	        			// mmSong.singNextVerse();
-        			
-	        			 songView.setText(mSong[mBusLine]);
+	        			mmSong.singNextVerse();
+        			/*
+	        			songView.setText(mSong[mBusLine]);
 	        			 
 	        			verseView.setText("Verse #: " + (mBusLine + 1)
 	        					+ " / " + mSong.length);
 	        			mBusLine = (mBusLine < (mSong.length - 1))
 	        						? (mBusLine + 1) : 0;
-					
+					*/
 	        		}
 	        	}
 	    	);
         }
     }
-    
+
     // ------------------------------------------------------------------------
-    
+        
     private void setupHappyFaceSongButton() {
 
     	mHappyFaceButton = (ImageView) findViewById(R.id.happyFaceButton);
 
-    	if (mHappyFaceButton.isShown()) {
-	    	// mmSong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
-    		mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
+    	if (mHappyFaceButton.isClickable()) {
+	    	mmSong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
+    		// mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
 	    	// final TextView songView = mSongView;
 	    	// final TextView verseView = mVerseView;
-	        // final ImageView happyFaceButton = mHappyFaceButton;
-	        mHappyFaceButton.setOnClickListener(
+	        final ImageView happyFaceButton = mHappyFaceButton;
+	        happyFaceButton.setOnClickListener(
             	new View.OnClickListener()
             	{
             		public void onClick(View v)
@@ -156,6 +158,39 @@ public class KaraokeHelper extends WAMSActivity {
             	}
         	);
     	}
+    }
+
+    // ------------------------------------------------------------------------
+        
+    private void setupSongButton() {
+
+    	mHappyFaceButton = (ImageView) findViewById(R.id.happyFaceButton);
+		mBusButton = (ImageView) findViewById(R.id.busButton);
+
+		final ImageView songButton;
+    	if (mHappyFaceButton.isClickable()) {
+	    	mmSong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
+    		// mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
+	    	// final TextView songView = mSongView;
+	    	// final TextView verseView = mVerseView;
+	        songButton = mHappyFaceButton;
+
+    	} else if (mBusButton.isClickable()) {
+	    	mmSong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
+	        songButton = mBusButton;
+    	} else {
+    		songButton = mHappyFaceButton;
+    	}
+    	
+        songButton.setOnClickListener(
+            	new View.OnClickListener()
+            	{
+            		public void onClick(View v)
+            		{
+            			mmSong.singNextVerse();
+            		}
+            	}
+        	);
     }
     
     // ------------------------------------------------------------------------
