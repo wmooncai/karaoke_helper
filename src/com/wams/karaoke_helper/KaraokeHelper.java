@@ -50,9 +50,10 @@ public class KaraokeHelper extends WAMSActivity {
 	// private String[] mBusSong;
 	
 	private TextView mSongView;
-	// private String[] mSong;
+	// private String[] mHappySong;
 	
-	private Song mSong;
+	private Song mHappySong;
+	private Song mBusSong;
 	
 	private TextView mVerseView;
 	private int mVerseDelay;
@@ -70,11 +71,6 @@ public class KaraokeHelper extends WAMSActivity {
         mSongView = (TextView) findViewById(R.id.songView);
         mVerseView = (TextView) findViewById(R.id.verseView);
         mVerseDelay = mContext.getResources().getInteger(R.integer.scroll_rate);
-        
-        mSong = new Song(mSongView, mVerseView
-        		,mContext.getResources().getInteger(R.integer.scroll_rate)
-        		,mContext.getResources().getInteger(R.integer.scroll_min)
-        		, mContext.getResources().getInteger(R.integer.scroll_max));
         
         setupSongButtons();
         
@@ -103,8 +99,8 @@ public class KaraokeHelper extends WAMSActivity {
     		mBusButton = (ImageView) findViewById(R.id.busButton);
 
         if (mBusButton.isClickable()) {
-	        mSong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
-        	// mSong = mContext.getResources().getStringArray(R.array.bus_song);
+	        mHappySong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
+        	// mHappySong = mContext.getResources().getStringArray(R.array.bus_song);
 	    	// final TextView songView = mSongView;
 	    	// final TextView verseView = mVerseView;
 	        final ImageView busButton = mBusButton;
@@ -113,13 +109,13 @@ public class KaraokeHelper extends WAMSActivity {
 	        	{
 	        		public void onClick(View v)
 	        		{
-	        			mSong.singNextVerse();
+	        			mHappySong.singNextVerse();
         			/*
-	        			songView.setText(mSong[mBusLine]);
+	        			songView.setText(mHappySong[mBusLine]);
 	        			 
 	        			verseView.setText("Verse #: " + (mBusLine + 1)
-	        					+ " / " + mSong.length);
-	        			mBusLine = (mBusLine < (mSong.length - 1))
+	        					+ " / " + mHappySong.length);
+	        			mBusLine = (mBusLine < (mHappySong.length - 1))
 	        						? (mBusLine + 1) : 0;
 					
 	        		}
@@ -135,8 +131,8 @@ public class KaraokeHelper extends WAMSActivity {
     	mHappyFaceButton = (ImageView) findViewById(R.id.happyFaceButton);
 
     	if (mHappyFaceButton.isClickable()) {
-	    	mSong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
-    		// mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
+	    	mHappySong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
+    		// mHappySong = mContext.getResources().getStringArray(R.array.happy_face_song);
 	    	// final TextView songView = mSongView;
 	    	// final TextView verseView = mVerseView;
 	        final ImageView happyFaceButton = mHappyFaceButton;
@@ -145,13 +141,13 @@ public class KaraokeHelper extends WAMSActivity {
             	{
             		public void onClick(View v)
             		{
-            		mSong.singNextVerse();
+            		mHappySong.singNextVerse();
         			/*
-            			songView.setText(mSong[mHappyFaceLine]);
+            			songView.setText(mHappySong[mHappyFaceLine]);
             			verseView.setText("Verse #: " + (mHappyFaceLine + 1)
-            					+ " / " + mSong.length);
+            					+ " / " + mHappySong.length);
             			mHappyFaceLine =
-            					(mHappyFaceLine < (mSong.length - 1))
+            					(mHappyFaceLine < (mHappySong.length - 1))
             						? (mHappyFaceLine + 1) : 0;
 					
             		}
@@ -164,10 +160,20 @@ public class KaraokeHelper extends WAMSActivity {
         
     private void setupSongButtons() {
 
+    	// ----- Bus Song
+    	
+    	int scrollRate = mContext.getResources().getInteger(R.integer.scroll_rate);
+    	int scrollMin = mContext.getResources().getInteger(R.integer.scroll_min);
+    	int scrollMax = mContext.getResources().getInteger(R.integer.scroll_max);
+    	
     	mHappyFaceButton = (ImageView) findViewById(R.id.happyFaceButton);
 		mBusButton = (ImageView) findViewById(R.id.busButton);
 
-    	mSong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
+        mBusSong = new Song(mSongView, mVerseView
+        		, scrollRate
+        		, scrollMin
+        		, scrollMax);
+        mBusSong.setSong(mContext.getResources().getStringArray(R.array.bus_song));
     	
     	final ImageView busSongButton = mBusButton;
         busSongButton.setOnClickListener(
@@ -175,20 +181,26 @@ public class KaraokeHelper extends WAMSActivity {
             	{
             		public void onClick(View v)
             		{
-            			mSong.singNextVerse();
+            			mBusSong.singNextVerse();
             		}
             	}
         	);
 
-    	mSong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
-    	final ImageView happySongButton = mHappyFaceButton;
+        // ----- Happy Song
+        
+        mHappySong = new Song(mSongView, mVerseView
+        		, scrollRate
+        		, scrollMin
+        		, scrollMax);
+    	mHappySong.setSong(mContext.getResources().getStringArray(R.array.happy_face_song));
     	
+    	final ImageView happySongButton = mHappyFaceButton;
         happySongButton.setOnClickListener(
             	new View.OnClickListener()
             	{
             		public void onClick(View v)
             		{
-            			mSong.singNextVerse();
+            			mHappySong.singNextVerse();
             		}
             	}
         	);
@@ -238,7 +250,7 @@ public class KaraokeHelper extends WAMSActivity {
 					if (autoScrollByVerseLengthCB.isChecked())
 						autoScrollByVerseLengthCB.setChecked(false);
 					
-					mSong.singSong();
+					mHappySong.singSong();
 				}
 			}
 		});
@@ -252,10 +264,10 @@ public class KaraokeHelper extends WAMSActivity {
     private void playSong() throws InterruptedException {
     	    	
     	if (mBusButton.isShown()) {
-    		mSong = mContext.getResources().getStringArray(R.array.bus_song);
+    		mHappySong = mContext.getResources().getStringArray(R.array.bus_song);
     	} else if (mHappyFaceButton.isShown()) {
-    		mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
-    	} else mSong = mContext.getResources().getStringArray(R.array.happy_face_song);
+    		mHappySong = mContext.getResources().getStringArray(R.array.happy_face_song);
+    	} else mHappySong = mContext.getResources().getStringArray(R.array.happy_face_song);
     	
     	// Sanitize mVerseDelay
     	int minDelay = mContext.getResources().getInteger(R.integer.scroll_min);
@@ -276,9 +288,9 @@ public class KaraokeHelper extends WAMSActivity {
     	final Runnable toScreen = new Runnable() {
     		public void run() {
     			
-    			if (fVerseCounter < mSong.length) {
-    				mSongView.setText(mSong[fVerseCounter].toString());
-    				mVerseView.setText("Verse #: " + mVerseCount + " / " + mSong.length);
+    			if (fVerseCounter < mHappySong.length) {
+    				mSongView.setText(mHappySong[fVerseCounter].toString());
+    				mVerseView.setText("Verse #: " + mVerseCount + " / " + mHappySong.length);
     				
     				final ScheduledFuture<?> toScreenHandle = scheduler.schedule(verseToScreen(fVerseCounter - 1), mVerseDelay, SECONDS);
     			}

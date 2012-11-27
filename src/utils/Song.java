@@ -3,6 +3,8 @@
  */
 package utils;
 
+import android.os.Handler;
+import android.os.SystemClock;
 import android.widget.TextView;
 import utils.Debug;
 
@@ -33,8 +35,8 @@ public class Song {
 	
 	public int mVerseLine = 0;
 	
-	Verse verse = new Verse("VerseThread");
-	Thread verseThread = new Thread(verse);
+	Verse mVerse = new Verse("VerseThread");
+	private Handler mHandler = new Handler();
 	
 	private Debug d = new Debug(true, Debug.DEBUG_LEVEL_DEBUG);
 	
@@ -72,7 +74,7 @@ public class Song {
 				+ mScrollMax);
 	}
 	
-    // ------------------------------------------------------------------------
+    // ========================================================================
 
 	public void singNextVerse() {
 		mSongTV.setText(mSong[mVerseLine]);
@@ -90,14 +92,9 @@ public class Song {
 
 	public void singSong() {
 		
-		verseThread.start();
 		for (int line = 0; line < mSong.length; line++) {
-			try {
-				Thread.sleep(mAutoScrollDelay);
-			} catch (InterruptedException e) {
-				d.toLog(Debug.DEBUG_LEVEL_INFORMATIONAL
-						, "Verse.singSong() - InterruptedException ");
-			}
+            mHandler.removeCallbacks(mVerse);
+            mHandler.postDelayed(mVerse, 100);
 		}
 	}
 
@@ -136,5 +133,20 @@ public class Song {
 		
 	}
 	
+	
+	private Runnable Verse2 = new Runnable() {
+		   public void run() {
+		       final long start = System.currentTimeMillis();
+		       long millis = SystemClock.uptimeMillis() - start;
+		       int seconds = (int) (millis / 1000);
+		       int minutes = seconds / 60;
+		       seconds     = seconds % 60;
+	     /*
+		       mHandler.postAtTime(this,
+		               singNextVerse());
+	      */
+		   }
+		};
+		
 } // Class Song
     
